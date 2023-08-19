@@ -1,7 +1,9 @@
+import './mainPage.css'
+
 const MainPage = () => {
   return (
     <div>
-      <h1>hola</h1>
+      <h1>Hola</h1>
     </div>
   )
 }
