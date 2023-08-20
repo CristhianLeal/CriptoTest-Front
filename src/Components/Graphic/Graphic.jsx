@@ -49,11 +49,15 @@ const Graphic = (data) => {
       }
     ]
   }
-
   const scaleInc = () => {
     if (scaleMin < scaleMax) {
-      setScaleMin(scaleMin + 50)
-      setScaleMax(scaleMax - 50)
+      if (scaleMax - 25 <= scaleMin + 25) {
+        setScaleMin(scaleMin + (scaleMax - scaleMin) / 2 - 1)
+        setScaleMax(scaleMax - (scaleMax - scaleMin) / 2 + 1)
+      } else {
+        setScaleMin(scaleMin + 25)
+        setScaleMax(scaleMax - 25)
+      }
     }
   }
   const scaleDec = () => {
@@ -62,14 +66,16 @@ const Graphic = (data) => {
       setScaleMax(scaleMax + 50)
     }
   }
+  const foco = () => {
+    setScaleMin(minPrice)
+    setScaleMax(maxPrice)
+  }
   useEffect(() => {
     setScaleMin(minPrice)
     setScaleMax(maxPrice)
   }, [data])
   useEffect(() => {
-    console.log('Component has rendered')
   }, [scaleMin, scaleMax])
-
   const misoptions = {
     scales: {
       y: {
@@ -87,10 +93,13 @@ const Graphic = (data) => {
     }
   }
   return (
-    <div className='d-flex justify-content-center align-items-center'>
+    <div className='d-flex flex-column flex-md-row justify-content-center align-items-center'>
       <Line data={midata} options={misoptions} className='w-100 h-auto'/>
+      <div className='d-flex flex-md-column flex-row gap-4 mt-md-0 mt-4'>
       <button onClick={scaleInc}>+</button>
       <button onClick={scaleDec}>-</button>
+      <button onClick={foco}>Foco</button>
+      </div>
     </div>
   )
 }

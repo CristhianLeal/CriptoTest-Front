@@ -10,7 +10,6 @@ const MainPage = () => {
     const fetchInfo = async () => {
       try {
         const response = await axios.get('http://localhost:8003/')
-        console.log(response.data)
         setInfo(response.data)
       } catch (error) {
         console.error('Error', error)
