@@ -26,6 +26,7 @@ ChartJS.register(
 const Graphic = (data) => {
   const [scaleMin, setScaleMin] = useState(0)
   const [scaleMax, setScaleMax] = useState(0)
+  const [fScale, setFScale] = useState(0)
   const date = data?.data?.map(item => item.date)
   let minPrice = Number.POSITIVE_INFINITY
   let maxPrice = Number.NEGATIVE_INFINITY
@@ -51,19 +52,19 @@ const Graphic = (data) => {
   }
   const scaleInc = () => {
     if (scaleMin < scaleMax) {
-      if (scaleMax - 25 <= scaleMin + 25) {
-        setScaleMin(scaleMin + (scaleMax - scaleMin) / 2 - 1)
-        setScaleMax(scaleMax - (scaleMax - scaleMin) / 2 + 1)
+      if (scaleMax - fScale <= scaleMin + fScale) {
+        setScaleMin(scaleMin + (scaleMax - scaleMin) / 2 - (fScale / 10))
+        setScaleMax(scaleMax - (scaleMax - scaleMin) / 2 + (fScale / 10))
       } else {
-        setScaleMin(scaleMin + 25)
-        setScaleMax(scaleMax - 25)
+        setScaleMin(scaleMin + fScale)
+        setScaleMax(scaleMax - fScale)
       }
     }
   }
   const scaleDec = () => {
     if (scaleMax > scaleMin) {
-      setScaleMin(scaleMin - 50)
-      setScaleMax(scaleMax + 50)
+      setScaleMin(scaleMin - fScale)
+      setScaleMax(scaleMax + fScale)
     }
   }
   const foco = () => {
@@ -73,6 +74,7 @@ const Graphic = (data) => {
   useEffect(() => {
     setScaleMin(minPrice)
     setScaleMax(maxPrice)
+    setFScale(maxPrice / 100)
   }, [data])
   useEffect(() => {
   }, [scaleMin, scaleMax])
