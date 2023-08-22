@@ -71,6 +71,15 @@ const Graphic = (data) => {
     setScaleMin(minPrice)
     setScaleMax(maxPrice)
   }
+  const graphiUp = () => {
+    setScaleMin(scaleMin + fScale)
+    setScaleMax(scaleMax + fScale)
+  }
+  const graphiDown = () => {
+    setScaleMin(scaleMin - fScale)
+    setScaleMax(scaleMax - fScale)
+  }
+
   useEffect(() => {
     setScaleMin(minPrice)
     setScaleMax(maxPrice)
@@ -79,6 +88,7 @@ const Graphic = (data) => {
   useEffect(() => {
   }, [scaleMin, scaleMax])
   const misoptions = {
+    maintainAspectRatio: false,
     scales: {
       y: {
         min: scaleMin,
@@ -96,11 +106,13 @@ const Graphic = (data) => {
   }
   return (
     <div className='d-flex flex-column flex-md-row justify-content-center align-items-center'>
-      <Line data={midata} options={misoptions} className='w-100 h-auto'/>
+      <Line data={midata} options={misoptions} className='w-100 h-auto graphicSize'/>
       <div className='d-flex flex-md-column flex-row gap-4 mt-md-0 mt-4'>
       <button onClick={scaleInc}>+</button>
       <button onClick={scaleDec}>-</button>
       <button onClick={foco}>Foco</button>
+      <button onClick={graphiUp}><i className='bi bi-caret-up-fill'></i></button>
+      <button onClick={graphiDown}><i className='bi bi-caret-down-fill'></i></button>
       </div>
     </div>
   )

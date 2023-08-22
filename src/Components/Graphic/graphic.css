@@ -1,0 +1,11 @@
+.graphicSize{
+  min-height: 300px !important;
+  max-height: 500px !important;
+}
+
+@media (max-width: 768px) {
+  .graphicSize {
+    min-height: 200px !important;
+    max-height: 400px !important;
+  }
+}
