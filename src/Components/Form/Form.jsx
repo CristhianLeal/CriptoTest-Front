@@ -15,8 +15,7 @@ const Form = () => {
       } else if (data.cripto === 'matic-mainnet') {
         localStorage.setItem('cripto', 'Matic Token')
       }
-      console.log('enviado')
-      console.log(data.cripto)
+      localStorage.setItem('quoteCurrency', data.quoteCurrency)
       window.location.href = 'http://127.0.0.1:5173/mainpage/'
     } catch (error) {
       console.error('Error', error)
@@ -24,7 +23,7 @@ const Form = () => {
     reset()
   }
   return (
-    <div>
+    <div className='form p-4'>
       <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column align-items-center'>
         <div className="form-group">
           <label className='px-2'>Seleccioná tu cripto: </label>
@@ -41,15 +40,15 @@ const Form = () => {
         <div className="form-group mt-3">
           <label className='px-2'>Seleccioná tu moneda: </label>
           <select
-            name="money"
-            className={`${errors?.money ? 'is-invalid' : ''}`}
-            {...register('money', { required: 'moneda is required' })}
+            name="quoteCurrency"
+            className={`${errors?.quoteCurrency ? 'is-invalid' : ''}`}
+            {...register('quoteCurrency', { required: 'El tipo de moneda es requerido' })}
             >
             <option value="USD">USD</option>
-            <option value="PESO">PESO</option>
+            <option value="GBP">GBP</option>
             <option value="EUR">EURO</option>
           </select>
-          {errors.money && <span className="error">{errors.money.message}</span>}
+          {errors.quoteCurrency && <span className="error">{errors.quoteCurrency.message}</span>}
         </div>
         <div className="form-group mt-3">
           <label>Fecha desde:</label>
