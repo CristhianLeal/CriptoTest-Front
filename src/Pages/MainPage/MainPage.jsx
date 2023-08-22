@@ -6,10 +6,11 @@ import Graphic from '../../Components/Graphic/Graphic'
 const MainPage = () => {
   const [info, setInfo] = useState([])
   const cripto = localStorage.getItem('cripto')
+  const quoteCurrency = localStorage.getItem('quoteCurrency')
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get(`http://localhost:8003/${cripto}`)
+        const response = await axios.get(`http://localhost:8003/${cripto}/${quoteCurrency}`)
         setInfo(response.data)
       } catch (error) {
         console.error('Error', error)
@@ -20,8 +21,8 @@ const MainPage = () => {
   }, [])
 
   return (
-    <div className='d-flex flex-column align-items-center'>
-      <h2 className='mt-5'>Chequa el historial de tu cripto favorita</h2>
+    <div className='d-flex flex-column align-items-center justify-content-center'>
+      <h2 className='mt-5 text-center'>Chequa el historial de tu cripto favorita!</h2>
       <div>
         <div className='d-flex justify-content-center align-items-center'>
           <h3 className='text-center title'>{info.contractName}</h3>
