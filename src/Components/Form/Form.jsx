@@ -1,13 +1,27 @@
 import { useForm } from 'react-hook-form'
 import { useState } from 'react'
+import axios from 'axios'
 import './form.css'
 
 const Form = () => {
-  const [dateN, setDateN] = useState(null)
-  const { register, handleSubmit, formState: { errors } } = useForm()
-  const onSubmit = (data) => {
-    console.log(data)
-    // reset()
+  const [dateFinal, setDateFinal] = useState(null)
+  const [dateInitial, setDateInitial] = useState(null)
+  const { register, handleSubmit, formState: { errors }, reset } = useForm()
+  const onSubmit = async (data) => {
+    try {
+      await axios.post('http://localhost:8003/', data)
+      if (data.cripto === 'eth-mainnet') {
+        localStorage.setItem('cripto', 'Ether')
+      } else if (data.cripto === 'matic-mainnet') {
+        localStorage.setItem('cripto', 'Matic Token')
+      }
+      console.log('enviado')
+      console.log(data.cripto)
+      window.location.href = 'http://127.0.0.1:5173/mainpage/'
+    } catch (error) {
+      console.error('Error', error)
+    }
+    reset()
   }
   return (
     <div>
@@ -27,15 +41,43 @@ const Form = () => {
         <div className="form-group mt-3">
           <label className='px-2'>Seleccioná tu moneda: </label>
           <select
-            name="moneda"
-            className={`${errors?.moneda ? 'is-invalid' : ''}`}
-            {...register('moneda', { required: 'moneda is required' })}
+            name="money"
+            className={`${errors?.money ? 'is-invalid' : ''}`}
+            {...register('money', { required: 'moneda is required' })}
             >
             <option value="USD">USD</option>
             <option value="PESO">PESO</option>
             <option value="EUR">EURO</option>
           </select>
-          {errors.moneda && <span className="error">{errors.moneda.message}</span>}
+          {errors.money && <span className="error">{errors.money.message}</span>}
+        </div>
+        <div className="form-group mt-3">
+          <label>Fecha desde:</label>
+          <input
+          type="date"
+          name='dateFrom'
+          className="form-control"
+          {...register('dateFrom', {
+            required: 'Ingrese una fecha',
+            validate: (value) => {
+              const yesterday = new Date()
+              yesterday.setDate(yesterday.getDate() - 1)
+              const selectedDate = new Date(value)
+              const maxDate = new Date(dateFinal)
+              maxDate.setDate(maxDate.getDate() - 30)
+              if (selectedDate > yesterday) {
+                return 'La fecha debe ser menor que el dia de ayer'
+              } else if (selectedDate.toISOString().split('T')[0] >= dateFinal) {
+                return 'La fecha no debe ser mayor que la final'
+              } else if (selectedDate < maxDate) {
+                return 'El historico no puede ser mayor que 30 días'
+              }
+              setDateInitial(value)
+              return true
+            }
+          })}
+          />
+          {errors.dateFrom && <span className="error">{errors.dateFrom.message}</span>}
         </div>
         <div className="form-group mt-3">
           <label>Fecha hasta:</label>
@@ -50,40 +92,15 @@ const Form = () => {
               const selectedDate = new Date(value)
               if (selectedDate > today) {
                 return 'La fecha no debe ser mayor al dia de hoy'
+              } else if (selectedDate.toISOString().split('T')[0] < dateInitial) {
+                return 'La fecha no debe ser menor que el dia desde'
               }
-              setDateN(value)
+              setDateFinal(value)
               return true
             }
           })}
           />
           {errors.dateTo && <span className="error">{errors.dateTo.message}</span>}
-        </div>
-        <div className="form-group mt-3">
-          <label>Fecha desde:</label>
-          <input
-          type="date"
-          name='dateFrom'
-          className="form-control"
-          {...register('dateFrom', {
-            required: 'Ingrese una fecha',
-            validate: (value) => {
-              const yesterday = new Date()
-              yesterday.setDate(yesterday.getDate() - 1)
-              const selectedDate = new Date(value)
-              const maxDate = new Date(dateN)
-              maxDate.setDate(maxDate.getDate() - 30)
-              if (selectedDate > yesterday) {
-                return 'La fecha debe ser menor que el dia de ayer'
-              } else if (selectedDate.toISOString().split('T')[0] >= dateN) {
-                return 'La fecha no debe ser mayor que la final'
-              } else if (selectedDate < maxDate) {
-                return 'El historico no puede ser mayor que 30 días'
-              }
-              return true
-            }
-          })}
-          />
-          {errors.dateFrom && <span className="error">{errors.dateFrom.message}</span>}
         </div>
         <button type="submit" className="btn btn-primary mt-3">Historico</button>
       </form>

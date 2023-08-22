@@ -5,11 +5,11 @@ import Graphic from '../../Components/Graphic/Graphic'
 
 const MainPage = () => {
   const [info, setInfo] = useState([])
-
+  const cripto = localStorage.getItem('cripto')
   useEffect(() => {
     const fetchInfo = async () => {
       try {
-        const response = await axios.get('http://localhost:8003/')
+        const response = await axios.get(`http://localhost:8003/${cripto}`)
         setInfo(response.data)
       } catch (error) {
         console.error('Error', error)
