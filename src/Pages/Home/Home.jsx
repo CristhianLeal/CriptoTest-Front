@@ -38,9 +38,9 @@ const Home = () => {
 
   return (
     <div className='d-flex flex-column align-items-center conten'>
-      <h1 ref={SRef0} className={`titleH1 mt-5 text-center mb-4 EfectTransX1 ${contVisibleA[0] ? 'EfectVisible1' : ''}`}>Bienvenidos a cotizador de cripto</h1>
-      <h2 ref={SRef1} className={`titleH2 mt-3 text-center mb-4 EfectTransX2 ${contVisibleA[1] ? 'EfectVisible2' : ''}`} >El lugar donde podras saber si es conveniente o no invertir</h2>
-      <div ref={SRef2} className={`EfectSize ${contVisibleA[2] ? 'EfectVisible3' : ''} mb-4`}>
+      <h1 ref={SRef0} className={`titleH1 mt-5 text-center mb-4 EfectTransX1 ${contVisibleA[0] ? 'EfectVisible1' : ''}`}>Bienvenidos a tu cripto historial</h1>
+      <h2 ref={SRef1} className={`titleH2 mt-3 text-center mb-5 EfectTransX2 ${contVisibleA[1] ? 'EfectVisible2' : ''}`} >El lugar donde podras saber como se comportó tu cripto favorita</h2>
+      <div ref={SRef2} className={`mt-lg-4 mt-0 EfectSize ${contVisibleA[2] ? 'EfectVisible3' : ''} mb-4`}>
         <Form ></Form>
       </div>
     </div>

@@ -1,6 +1,8 @@
 .conten{
   max-width: 100% !important;
   overflow: hidden !important;
+  background-color: var(--colorHome);
+  min-height: 100vh;
 }
 .EfectTransX1 {
   transition: transform 0.6s ease-in-out;
