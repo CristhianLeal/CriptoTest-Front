@@ -4,37 +4,14 @@
   background-color: var(--colorHome);
   min-height: 100vh;
 }
-.EfectTransX1 {
-  transition: transform 0.6s ease-in-out;
-  transform: translateX(-110%);
-}
-.EfectTransX1.EfectVisible1 {
-  transform: translateX(0);
-}
-.EfectTransX2 {
-  transition: transform 0.9s ease-in-out;
-  transform: translateX(110%);
-}
-.EfectTransX2.EfectVisible2 {
-  transform: translateX(0);
-}
-.EfectSize{
-  transition: transform 1s ease-in-out;
-  transform: scale(0);
-  transform-origin: center;
-}
-.EfectSize.EfectVisible3 {
-  transform: scale(1);
-}
 .titleH1{
-  text-shadow: 2px 2px 2px rgba(var(--red), var(--green), var(--blue), var(--opacity));
+  text-shadow: 2px 2px 2px var(--colorShadow);
   font-size: 70px;
 }
 .titleH2{
-  text-shadow: 2px 2px 2px rgba(var(--red), var(--green), var(--blue), var(--opacity));
+  text-shadow: 2px 2px 2px var(--colorShadow);
   font-size: 50px;
 }
-
 @media (max-width: 768px) {
   .titleH1{
     font-size: 40px;

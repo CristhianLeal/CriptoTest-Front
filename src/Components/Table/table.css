@@ -22,7 +22,7 @@
 }
 
 .styled-table th {
-  background-color: rgba(var(--red), var(--green), var(--blue));
+  background-color: var(--colorDetail);
   color: white;
 }
 

@@ -4,7 +4,7 @@
 }
 .controller{
   color: white;
-  background-color: rgba(var(--red), var(--green), var(--blue));
+  background-color: var(--colorDetail);
   border-radius: 10px ;
   transition: background-color 0.5s ease, color 0.5s ease;
 }
@@ -13,6 +13,9 @@
   color: black;
   transform: scale(1.2);
   transition: transform 0.3s;
+}
+.graphicStyle{
+  background-color: rgb(255, 255, 255);
 }
 
 @media (max-width: 768px) {

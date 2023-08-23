@@ -1,11 +1,38 @@
 :root {
-  --red: 0;
-  --green: 0;
-  --blue: 116;
-  --opacity: 0.4;
-  --colorHome: rgb(149, 245, 245);
+  --colorDetail: rgba(0, 0, 116, 1);
+  --colorShadow: rgba(0, 0, 116, 0.4);
+  --colorHome: rgba(154, 152, 179, 0.589);
 }
 *{
   margin: 0;
   padding: 0;
+}
+.EfectTransX1 {
+  transition: transform 0.6s ease-in-out;
+  transform: translateX(-110%);
+}
+.EfectTransX1.EfectVisible1 {
+  transform: translateX(0);
+}
+.EfectTransX2 {
+  transition: transform 0.9s ease-in-out;
+  transform: translateX(110%);
+}
+.EfectTransX2.EfectVisible2 {
+  transform: translateX(0);
+}
+.EfectSize{
+  transition: transform 1s ease-in-out;
+  transform: scale(0);
+  transform-origin: center;
+}
+.EfectSize.EfectVisible3 {
+  transform: scale(1);
+}
+.EfectTransY {
+  transition: transform 1.2s ease-in-out;
+  transform: translateY(110%);
+}
+.EfectTransY.EfectVisible4 {
+  transform: translateY(0);
 }

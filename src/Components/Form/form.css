@@ -1,10 +1,10 @@
 .form{
-  border: 1px solid rgba(var(--red), var(--green), var(--blue));
+  border: 1px solid var(--colorDetail);
   border-radius: 20px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
   background-color: white;
 }
 .btn{
-  background-color: rgba(var(--red), var(--green), var(--blue));
+  background-color: var(--colorDetail);
   border: transparent;
 }
