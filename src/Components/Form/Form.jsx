@@ -16,6 +16,8 @@ const Form = () => {
         localStorage.setItem('cripto', 'Matic Token')
       }
       localStorage.setItem('quoteCurrency', data.quoteCurrency)
+      localStorage.setItem('dateFrom', data.dateFrom)
+      localStorage.setItem('dateTo', data.dateTo)
       window.location.href = 'http://127.0.0.1:5173/mainpage/'
     } catch (error) {
       console.error('Error', error)
@@ -24,7 +26,7 @@ const Form = () => {
   }
   return (
     <div className='form p-4'>
-      <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column align-items-center'>
+      <form onSubmit={handleSubmit(onSubmit)} className='d-flex flex-column align-items-center total'>
         <div className="form-group">
           <label className='px-2'>Seleccioná tu cripto: </label>
           <select
@@ -63,13 +65,13 @@ const Form = () => {
               yesterday.setDate(yesterday.getDate() - 1)
               const selectedDate = new Date(value)
               const maxDate = new Date(dateFinal)
-              maxDate.setDate(maxDate.getDate() - 30)
+              maxDate.setDate(maxDate.getDate() - 364)
               if (selectedDate > yesterday) {
                 return 'La fecha debe ser menor que el dia de ayer'
               } else if (selectedDate.toISOString().split('T')[0] >= dateFinal) {
                 return 'La fecha no debe ser mayor que la final'
               } else if (selectedDate < maxDate) {
-                return 'El historico no puede ser mayor que 30 días'
+                return 'El historico no puede ser mayor que 1 año'
               }
               setDateInitial(value)
               return true
