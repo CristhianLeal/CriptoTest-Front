@@ -6,6 +6,9 @@ import './form.css'
 const Form = () => {
   const [dateFinal, setDateFinal] = useState(null)
   const [dateInitial, setDateInitial] = useState(null)
+  const today = new Date()
+  const yesterday = new Date()
+  yesterday.setDate(yesterday.getDate() - 1)
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
   const onSubmit = async (data) => {
     try {
@@ -61,17 +64,11 @@ const Form = () => {
           {...register('dateFrom', {
             required: 'Ingrese una fecha',
             validate: (value) => {
-              const yesterday = new Date()
-              yesterday.setDate(yesterday.getDate() - 1)
               const selectedDate = new Date(value)
-              const maxDate = new Date(dateFinal)
-              maxDate.setDate(maxDate.getDate() - 364)
               if (selectedDate > yesterday) {
                 return 'La fecha debe ser menor que el dia de ayer'
               } else if (selectedDate.toISOString().split('T')[0] >= dateFinal) {
                 return 'La fecha no debe ser mayor que la final'
-              } else if (selectedDate < maxDate) {
-                return 'El historico no puede ser mayor que 1 año'
               }
               setDateInitial(value)
               return true
@@ -89,12 +86,16 @@ const Form = () => {
           {...register('dateTo', {
             required: 'Ingrese una fecha',
             validate: (value) => {
-              const today = new Date()
               const selectedDate = new Date(value)
+              setDateFinal(value)
+              const maxDate = new Date(dateInitial)
+              maxDate.setFullYear(maxDate.getFullYear() + 1)
               if (selectedDate > today) {
                 return 'La fecha no debe ser mayor al dia de hoy'
               } else if (selectedDate.toISOString().split('T')[0] < dateInitial) {
                 return 'La fecha no debe ser menor que el dia desde'
+              } else if (selectedDate > maxDate) {
+                return 'El historico no puede ser mayor que 1 año'
               }
               setDateFinal(value)
               return true
@@ -103,7 +104,7 @@ const Form = () => {
           />
           {errors.dateTo && <span className="error">{errors.dateTo.message}</span>}
         </div>
-        <button type="submit" className="btn btn-primary mt-3">Historico</button>
+        <button type="submit" className="p-2 mt-3 controller">Historico</button>
       </form>
     </div>
   )

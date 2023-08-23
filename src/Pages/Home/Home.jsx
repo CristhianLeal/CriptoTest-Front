@@ -4,11 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 const Home = () => {
   const [, setVisible] = useState(false)
   const [contVisibleA, setContVisibleA] = useState([])
-
   const SRef0 = useRef(null)
   const SRef1 = useRef(null)
   const SRef2 = useRef(null)
-
   const handleScroll = () => {
     const refs = [SRef0, SRef1, SRef2]
     const visibilities = refs.map((ref) => {
@@ -21,7 +19,6 @@ const Home = () => {
     setVisible(visibilities.some((visibility) => visibility))
     setContVisibleA(visibilities)
   }
-
   useEffect(() => {
     handleScroll()
     window.scrollTo(0, 0)

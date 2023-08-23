@@ -49,10 +49,10 @@ const Graphic = (data) => {
         label: 'precio',
         data: price,
         tension: 0.5,
-        borderColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgba(0, 0, 116, 1)',
         pointRadius: 2,
-        pointBorderColor: 'rgba(255, 99, 132)',
-        pointBackgroundColor: 'rgba(255, 99, 132)'
+        pointBorderColor: 'rgba(0, 0, 116, 1)',
+        pointBackgroundColor: 'rgba(0, 0, 116, 1)'
       }
     ]
   }
@@ -96,7 +96,7 @@ const Graphic = (data) => {
   const misoptions = {
     plugins: {
       legend: {
-        position: 'bottom' // Coloca la leyenda (etiqueta) debajo de la gráfica
+        position: 'bottom'
       }
     },
     maintainAspectRatio: false,
@@ -116,7 +116,7 @@ const Graphic = (data) => {
     }
   }
   return (
-    <div className='d-flex flex-column flex-md-row justify-content-center align-items-center'>
+    <div className='d-flex flex-column flex-md-row justify-content-center align-items-center graphicStyle px-5'>
       <Line data={midata} options={misoptions} className='w-100 h-auto graphicSize'/>
       <div className='d-flex flex-md-column flex-row gap-4 mt-md-0 mt-4'>
       <button className='p-md-1 p-2 controller' onClick={scaleInc}>+</button>
