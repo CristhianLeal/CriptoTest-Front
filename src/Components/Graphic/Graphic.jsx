@@ -27,15 +27,21 @@ const Graphic = (data) => {
   const [scaleMin, setScaleMin] = useState(0)
   const [scaleMax, setScaleMax] = useState(0)
   const [fScale, setFScale] = useState(0)
-  const date = data?.data?.map(item => item.date)
+  const dateFrom = localStorage.getItem('dateFrom')
+  const dateTo = localStorage.getItem('dateTo')
   let minPrice = Number.POSITIVE_INFINITY
   let maxPrice = Number.NEGATIVE_INFINITY
-  const price = data?.data?.map(item => {
+  const dataFiltred = data?.data?.filter(item => {
+    const dateF = new Date(item.date)
+    return dateF >= new Date(dateFrom) && dateF <= new Date(dateTo)
+  }).reverse()
+  const price = dataFiltred?.map(item => {
     const parsedPrice = parseFloat(item.price)
     minPrice = Math.min(minPrice, parsedPrice)
     maxPrice = Math.max(maxPrice, parsedPrice)
     return parsedPrice
   })
+  const date = dataFiltred?.map(item => item.date)
   const midata = {
     labels: date,
     datasets: [
@@ -44,7 +50,7 @@ const Graphic = (data) => {
         data: price,
         tension: 0.5,
         borderColor: 'rgb(255, 99, 132)',
-        pointRadius: 5,
+        pointRadius: 2,
         pointBorderColor: 'rgba(255, 99, 132)',
         pointBackgroundColor: 'rgba(255, 99, 132)'
       }
@@ -68,8 +74,8 @@ const Graphic = (data) => {
     }
   }
   const foco = () => {
-    setScaleMin(minPrice)
-    setScaleMax(maxPrice)
+    setScaleMin(minPrice - maxPrice / 200)
+    setScaleMax(maxPrice + maxPrice / 200)
   }
   const graphiUp = () => {
     setScaleMin(scaleMin + fScale)
@@ -81,9 +87,9 @@ const Graphic = (data) => {
   }
 
   useEffect(() => {
-    setScaleMin(minPrice)
-    setScaleMax(maxPrice)
-    setFScale(maxPrice / 100)
+    setScaleMin(minPrice - maxPrice / 200)
+    setScaleMax(maxPrice + maxPrice / 200)
+    setFScale(maxPrice / 200)
   }, [data])
   useEffect(() => {
   }, [scaleMin, scaleMax])
@@ -108,11 +114,11 @@ const Graphic = (data) => {
     <div className='d-flex flex-column flex-md-row justify-content-center align-items-center'>
       <Line data={midata} options={misoptions} className='w-100 h-auto graphicSize'/>
       <div className='d-flex flex-md-column flex-row gap-4 mt-md-0 mt-4'>
-      <button onClick={scaleInc}>+</button>
-      <button onClick={scaleDec}>-</button>
-      <button onClick={foco}>Foco</button>
-      <button onClick={graphiUp}><i className='bi bi-caret-up-fill'></i></button>
-      <button onClick={graphiDown}><i className='bi bi-caret-down-fill'></i></button>
+      <button className='p-md-1 p-2 controller' onClick={scaleInc}>+</button>
+      <button className='p-md-1 p-2 controller' onClick={scaleDec}>-</button>
+      <button className='p-md-1 p-2 controller' onClick={foco}>Foco</button>
+      <button className='p-md-1 p-2 controller' onClick={graphiUp}><i className='bi bi-caret-up-fill'></i></button>
+      <button className='p-md-1 p-2 controller' onClick={graphiDown}><i className='bi bi-caret-down-fill'></i></button>
       </div>
     </div>
   )

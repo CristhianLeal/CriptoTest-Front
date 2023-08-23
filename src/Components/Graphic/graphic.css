@@ -2,6 +2,16 @@
   min-height: 300px !important;
   max-height: 500px !important;
 }
+.controller{
+  color: white;
+  background-color: rgba(var(--red), var(--green), var(--blue));
+  border-radius: 10px ;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+.controller:hover{
+  background-color: var(--colorHome);
+  color: black;
+}
 
 @media (max-width: 768px) {
   .graphicSize {
