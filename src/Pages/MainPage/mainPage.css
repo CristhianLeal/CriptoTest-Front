@@ -4,3 +4,19 @@
 body{
   background-color: rgb(255, 255, 255);
 }
+.titleH3{
+  text-shadow: 2px 2px 2px rgba(var(--red), var(--green), var(--blue), var(--opacity));
+  font-size: 50px;
+}
+.link{
+  color: white;
+  transition: color 0.5s ease;
+}
+.link:hover{
+  color: black;
+}
+@media (max-width: 768px) {
+  .titleH3{
+    font-size: 30px;
+  }
+}

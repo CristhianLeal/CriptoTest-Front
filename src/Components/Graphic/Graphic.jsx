@@ -94,6 +94,11 @@ const Graphic = (data) => {
   useEffect(() => {
   }, [scaleMin, scaleMax])
   const misoptions = {
+    plugins: {
+      legend: {
+        position: 'bottom' // Coloca la leyenda (etiqueta) debajo de la gráfica
+      }
+    },
     maintainAspectRatio: false,
     scales: {
       y: {

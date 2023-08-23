@@ -11,6 +11,8 @@
 .controller:hover{
   background-color: var(--colorHome);
   color: black;
+  transform: scale(1.2);
+  transition: transform 0.3s;
 }
 
 @media (max-width: 768px) {
