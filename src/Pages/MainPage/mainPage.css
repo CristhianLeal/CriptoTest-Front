@@ -18,6 +18,7 @@
 .link:hover{
   color: black;
 }
+
 @media (max-width: 768px) {
   .titleH3{
     font-size: 30px;

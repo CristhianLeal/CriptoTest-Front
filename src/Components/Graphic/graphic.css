@@ -17,6 +17,9 @@
 .graphicStyle{
   background-color: rgb(255, 255, 255);
 }
+.styleText{
+  text-shadow: 2px 2px 2px var(--colorShadow);
+}
 
 @media (max-width: 768px) {
   .graphicSize {

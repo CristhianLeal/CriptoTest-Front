@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router-dom'
-import Home from './Pages/Home/Home'
-import MainPage from './Pages/MainPage/MainPage'
+import { ToastContainer } from 'react-toastify'
 import './App.css'
+import 'react-toastify/dist/ReactToastify.css'
+import { Home, MainPage } from './Pages'
 
 function App () {
   return (
@@ -10,8 +11,11 @@ function App () {
         <Route exact path='/' element={<Home />} />
         <Route path='/mainpage' element={<MainPage />} />
       </Routes>
+      <ToastContainer
+        position="top-right"
+        autoClose={2000}
+      />
     </>
   )
 }
-
 export default App

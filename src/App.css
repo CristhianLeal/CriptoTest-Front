@@ -7,32 +7,25 @@
   margin: 0;
   padding: 0;
 }
-.EfectTransX1 {
+.effect-translateX-toLeft {
   transition: transform 0.6s ease-in-out;
   transform: translateX(-110%);
 }
-.EfectTransX1.EfectVisible1 {
+.effect-translateX-toLeft.EfectVisible1 {
   transform: translateX(0);
 }
-.EfectTransX2 {
+.effect-translateX-toRight {
   transition: transform 0.9s ease-in-out;
   transform: translateX(110%);
 }
-.EfectTransX2.EfectVisible2 {
+.effect-translateX-toRight.EfectVisible2 {
   transform: translateX(0);
 }
-.EfectSize{
+.effect-size{
   transition: transform 1s ease-in-out;
   transform: scale(0);
   transform-origin: center;
 }
-.EfectSize.EfectVisible3 {
+.effect-size.EfectVisible3 {
   transform: scale(1);
-}
-.EfectTransY {
-  transition: transform 1.2s ease-in-out;
-  transform: translateY(110%);
-}
-.EfectTransY.EfectVisible4 {
-  transform: translateY(0);
 }
