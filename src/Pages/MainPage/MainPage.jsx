@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css'
 import { Form, Graphic, Table } from '../../Components'
 
 const MainPage = () => {
-  const baseUrl = import.meta.env.VITE_BASE_URL
   const [data, setData] = useState([])
   const [isVisible, setIsVisible] = useState([])
   const cripto = localStorage.getItem('cripto')
@@ -30,7 +29,7 @@ const MainPage = () => {
   useEffect(() => {
     const fetchdata = async () => {
       try {
-        const response = await axios.get(`${baseUrl}/${cripto}/${quoteCurrency}`)
+        const response = await axios.get(`https://cryptotest-api.onrender.com/${cripto}/${quoteCurrency}`)
         setData(response.data)
         toast.success('Historico cargado exitosamente')
       } catch (error) {
