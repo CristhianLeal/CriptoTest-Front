@@ -5,6 +5,7 @@ import './form.css'
 import { toast } from 'react-toastify'
 
 const Form = () => {
+  const baseUrl = import.meta.env.VITE_BASE_URL
   const [dateFinal, setDateFinal] = useState(null)
   const [dateInitial, setDateInitial] = useState(null)
   const today = new Date()
@@ -13,7 +14,7 @@ const Form = () => {
   const { register, handleSubmit, formState: { errors }, reset } = useForm()
   const onSubmit = async (data) => {
     try {
-      await axios.post('http://localhost:8003/', data)
+      await axios.post(`${baseUrl}`, data)
       if (data.cripto === 'eth-mainnet') {
         localStorage.setItem('cripto', 'Ether')
       } else if (data.cripto === 'matic-mainnet') {
